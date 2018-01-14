@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="scripts/script.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body onload="showLocation()">
+
+<div class="topnav" id="myTopnav">
+  <a href="home.html">Home</a>
+  <a href="gamelist.html">Game List</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="content" id="myContent">
+<h1>My webpage</h1>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (p) {
+        var LatLng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+        var mapOptions = {
+            center: LatLng,
+            zoom: 4,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: LatLng,
+            map: map,
+            title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: " + p.coords.latitude + "<br />Longitude: " + p.coords.longitude
+        });
+        google.maps.event.addListener(marker, "click", function (e) {
+            var infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent(marker.title);
+            infoWindow.open(map, marker);
+        });
+    });
+} else {
+    alert('Geo Location feature is not supported in this browser.');
+}
+</script>
+<div id="map">
+</div>
+
+<h2>About</h2>
+<p>
+Hello visitor!
+Welcome to my webpage created for the purposes of KAMK web-development course as well as to serve as my temporary
+backlog of games and the status of their completion.
+</p>
+
+<h2>Cool game trailers</h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gKsEPoJMuKY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kgx4pSu4LHc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+</div>
+</body>
+</html>
+
